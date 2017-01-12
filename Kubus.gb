@@ -1,0 +1,186 @@
+'variabel untuk posisi kamera 
+Dim PCamx# = 0
+Dim PCamy# = 0
+Dim PCamz# = 4 
+
+'variabel untuk posisi titik pandang 
+Dim PPandx# = 0
+Dim PPandy# = 0 
+Dim PPandz# = 0
+
+'variabel perpindahan 
+dim pindah# = 0.1  
+
+'variabel putar
+dim muterx#
+dim mutery#
+dim muterz#  
+
+'variabel tekstur 
+Dim teks1, teks2, teks3, teks4, teks5, teks6 
+
+teks1 = loadmipmaptexture("data/duduk.jpg")
+teks2 = loadmipmaptexture("data/duduk.jpg")
+teks3 = loadmipmaptexture("data/duduk.jpg")
+teks4 = loadmipmaptexture("data/duduk.jpg")
+teks5 = loadmipmaptexture("data/duduk.jpg")
+teks6 = loadmipmaptexture("data/duduk.jpg")
+
+glEnable(GL_TEXTURE_2D)     
+
+'glEnable (GL_LIGHTING)
+
+'glEnable (GL_LIGHT0)
+
+'glLightfv (GL_LIGHT0, GL_POSITION, Vec3(0, 0, 1))
+'glLightfv (GL_LIGHT0, GL_AMBIENT, Vec4( .2, .2, .2, 1))
+'glLightfv (GL_LIGHT0, GL_DIFFUSE, Vec4(1, 1, 1, 1))
+
+glBindTexture(GL_TEXTURE_2D, teks1) 
+
+while true
+glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
+glLoadIdentity()
+
+gluLookAt(PCamx#, PCamy#, PCamz#, PPandx#, PPandy#, PPandz#, 0, 1, 0)
+
+
+
+glRotatef(muterx#,1,0,0)
+glRotatef(mutery#,0,1,0)
+glRotatef(muterz#,0,0,1)
+
+glBegin (GL_QUADS) 'sisi belakang    
+    'glColor3f(1.0, 0.0, 0.0) 
+    glTexCoord2f(1,1)
+    glVertex3f(1.0, 1.0, -1.0) 'kanan atas
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,0)
+    glVertex3f(1.0, -1.0, -1.0) 'kanan bawah
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(-1.0, -1.0, -1.0) 'kiri bawah 
+    
+'    glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,1)
+    glVertex3f(-1.0, 1.0, -1.0) 'kiri atas 
+glEnd()
+
+glBegin (GL_QUADS) 'sisi depan    
+    'glColor3f(1.0, 0.0, 0.0) 
+    glTexCoord2f(1,1)
+    glVertex3f(1.0, 1.0, 1.0) 'kanan atas
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,0)
+    glVertex3f(1.0, -1.0, 1.0) 'kanan bawah
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(-1.0, -1.0, 1.0) 'kiri bawah 
+    
+    'glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,1)
+    glVertex3f(-1.0, 1.0, 1.0) 'kiri atas 
+glEnd()
+
+glBegin (GL_QUADS) 'sisi kiri    
+    'glColor3f(1.0, 0.0, 0.0) 
+    glTexCoord2f(0,1)
+    glVertex3f(-1.0, 1.0, -1.0)
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,1)
+    glVertex3f(-1.0, 1.0, 1.0)
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(1,0)
+    glVertex3f(-1.0, -1.0, 1.0) 
+    
+    'glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(-1.0, -1.0, -1.0) 
+glEnd()
+
+glBegin (GL_QUADS) 'sisi kanan    
+    'glColor3f(1.0, 0.0, 0.0) 
+    glTexCoord2f(0,1)
+    glVertex3f(1.0, 1.0, -1.0)
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,1)
+    glVertex3f(1.0, 1.0, 1.0)
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(1,0)
+    glVertex3f(1.0, -1.0, 1.0) 
+    
+    'glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(1.0, -1.0, -1.0) 
+glEnd() 
+
+glBegin (GL_QUADS) 'sisi atas    
+    'glColor3f(1.0, 0.0, 0.0)
+    glTexCoord2f(1,0)
+    glVertex3f(1.0, 1.0, -1.0)
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,1)
+    glVertex3f(1.0, 1.0, 1.0)
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(0,1)
+    glVertex3f(-1.0, 1.0, 1.0) 
+    
+    'glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(-1.0, 1.0, -1.0) 
+glEnd() 
+
+glBegin (GL_QUADS) 'sisi bawah    
+    'glColor3f(1.0, 0.0, 0.0) 
+    glTexCoord2f(1,0)
+    glVertex3f(1.0, -1.0, -1.0)
+    
+    'glColor3f(0.0, 1.0, 0.0)
+    glTexCoord2f(1,1)
+    glVertex3f(1.0, -1.0, 1.0)
+    
+    'glColor3f(0.0, 0.0, 1.0)
+    glTexCoord2f(0,1)
+    glVertex3f(-1.0, -1.0, 1.0) 
+    
+    'glColor3f(1.0, 0.0, 1.0)
+    glTexCoord2f(0,0)
+    glVertex3f(-1.0, -1.0, -1.0) 
+glEnd()
+
+swapBuffers()
+
+muterx# = muterx# + 0.1
+mutery# = mutery# + 0.1
+muterz# = muterz# + 0.1
+
+if scankeydown(VK_RIGHT) then    ' gerak ke kanan
+PCamx# = PCamx# + pindah#
+elseif scankeydown(VK_LEFT) then  ' gerak ke kiri 
+PCamx# = PCamx# - pindah#
+elseif scankeydown(VK_UP) then  ' gerak ke atas 
+PCamy# = PCamy# + pindah#
+elseif scankeydown(VK_DOWN) then  ' gerak ke bawah
+PCamy# = PCamy# - pindah# 
+endif      
+
+wend          
+
+
+
+                        
+
+
+
+
+
